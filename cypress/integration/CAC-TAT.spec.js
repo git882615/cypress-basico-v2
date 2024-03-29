@@ -151,7 +151,7 @@ it('Interagir com o checkbox', function() {
 
 })
 
-it.only('seleciona um arquivo da pasta fixtures do Cypress e validar que nome correto do arquivo é persistido no objeto de files do input',
+it('seleciona um arquivo da pasta fixtures do Cypress e validar que nome correto do arquivo é persistido no objeto de files do input',
      function() {    
 
     cy.get('#file-upload').selectFile('cypress/fixtures/example.json')
@@ -160,7 +160,7 @@ it.only('seleciona um arquivo da pasta fixtures do Cypress e validar que nome co
     })
 })
 
-it.only('seleciona um arquivo simulando um drag-and-drop e validar que nome correto do arquivo é persistido no objeto de files do input',
+it('seleciona um arquivo simulando um drag-and-drop e validar que nome correto do arquivo é persistido no objeto de files do input',
      function() {    
 
     cy.get('#file-upload').selectFile('cypress/fixtures/example.json', {action: 'drag-drop'})
@@ -169,7 +169,7 @@ it.only('seleciona um arquivo simulando um drag-and-drop e validar que nome corr
     })
 })
 
-it.only('seleciona um arquivo utilizando uma fixture para a qual foi dada um alias e validar que nome correto do arquivo é persistido no objeto de files do input',
+it('seleciona um arquivo utilizando uma fixture para a qual foi dada um alias e validar que nome correto do arquivo é persistido no objeto de files do input',
      function() {    
 
     cy.fixture('example.json').as('exampleFile')    
@@ -179,8 +179,33 @@ it.only('seleciona um arquivo utilizando uma fixture para a qual foi dada um ali
     })
 })
 
+it('verifica que a política de privacidade abre em outra aba sem a necessidade de um clique',
+     function() {          
+    cy.get('#privacy a').should('have.attr', 'target','_blank')
+ 
+    })
+
+it('acessa a página da política de privacidade removendo o target e então clicando no link',
+    function() {          
+   cy.get('#privacy a').invoke('removeAttr', 'target').click()
+
+   })
+
+   it.only('testa a página da política de privacidade de forma independente',
+    function() {          
+   cy.get('#privacy a').invoke('removeAttr', 'target').click()
+   cy.title().should('be.equal','Central de Atendimento ao Cliente TAT - Política de privacidade') 
+
+   cy.contains('Talking About Testing').should('be.visible')
+
+   })
 
 })
+
+
+
+
+
 
 
 
